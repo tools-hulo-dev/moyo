@@ -1,4 +1,3 @@
-
 document.querySelectorAll('[id^="partners"] .gallery-block .slide').forEach(function(slide) {
 
   const img = slide.querySelector('img');
@@ -54,8 +53,10 @@ document.addEventListener("DOMContentLoaded", function () {
     wrapper.className = 'sections-split-wrapper';
     wrapper.id = `split-sections-${wrapperIndex}`;
 
+    // Insert wrapper before first section
     firstSection.parentNode.insertBefore(wrapper, firstSection);
 
+    // Collect correct number of sections
     let currentSection = firstSection;
     const sections = [];
 
@@ -65,12 +66,15 @@ document.addEventListener("DOMContentLoaded", function () {
       currentSection = currentSection.nextElementSibling;
     }
 
+    // Move sections inside wrapper
     sections.forEach(section => wrapper.appendChild(section));
 
+    // 🔎 Check if custom width exists (only checking first is enough)
     const hasCustomWidth = splitEl.getAttribute('data-1-width');
 
     if (hasCustomWidth) {
 
+      // Apply custom widths
       sections.forEach((section, index) => {
         const customWidth = splitEl.getAttribute(`data-${index + 1}-width`);
         if (customWidth) {
@@ -80,6 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     } else {
 
+      // 👇 Add fallback class like two-cols, three-cols etc.
       const numberNames = {
         2: 'two',
         3: 'three',
@@ -96,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+    // Sticky logic
     const stickyIndex = parseInt(sticky, 10);
     if (!isNaN(stickyIndex) && stickyIndex > 0 && sections[stickyIndex - 1]) {
       sections[stickyIndex - 1].classList.add('sticky-section');
@@ -114,7 +120,7 @@ const items = document.querySelectorAll(
   
 function updateOpacity() {
   const viewportCenter = window.innerHeight / 2;
-  const holdZone = 120; 
+  const holdZone = 120; // 👈 pixels around center that stay full opacity
 
   items.forEach(item => {
     const rect = item.getBoundingClientRect();
@@ -124,6 +130,7 @@ function updateOpacity() {
     let opacity;
 
     if (distance < holdZone) {
+      // Stay fully visible inside center zone
       opacity = 1;
     } else {
       const maxDistance = window.innerHeight / 2;
@@ -139,8 +146,6 @@ function updateOpacity() {
 updateOpacity();
 
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
 
   const blogHub = document.querySelector('#blog-hub');
@@ -151,12 +156,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (blogHub.querySelector('.swiper')) return;
 
+  // Create outer wrapper
   const sliderWrapper = document.createElement('div');
   sliderWrapper.classList.add('blog-slider-wrapper');
 
+  // Create swiper container
   const swiperContainer = document.createElement('div');
   swiperContainer.classList.add('swiper');
 
+  // Navigation wrapper
   const navWrapper = document.createElement('div');
   navWrapper.classList.add('blog-slider-nav');
 
@@ -169,14 +177,19 @@ document.addEventListener("DOMContentLoaded", function () {
   navWrapper.appendChild(prevBtn);
   navWrapper.appendChild(nextBtn);
 
+  // Insert wrapper
   list.parentNode.insertBefore(sliderWrapper, list);
 
+  // Move swiper container
   sliderWrapper.appendChild(swiperContainer);
 
+  // Move list inside swiper
   swiperContainer.appendChild(list);
 
+  // Insert nav after slider
   sliderWrapper.parentNode.insertBefore(navWrapper, sliderWrapper.nextSibling);
 
+  // Structure classes
   list.classList.add('swiper-wrapper');
 
   const slides = list.querySelectorAll('.summary-item');
@@ -184,11 +197,13 @@ document.addEventListener("DOMContentLoaded", function () {
   slides.forEach(slide => {
     slide.classList.add('swiper-slide');
 
+    // remove squarespace inline layout styles
     slide.style.removeProperty('width');
     slide.style.removeProperty('margin-right');
     slide.style.removeProperty('clear');
   });
 
+  // Delay swiper init (fixes blink)
   requestAnimationFrame(() => {
 
     setTimeout(() => {
@@ -225,7 +240,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
-
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -293,7 +307,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
 document.addEventListener('click', function(e) {
   const arrow = e.target.closest('.arrow-down, .arrow-down-dk');
   if (!arrow) return;
@@ -309,8 +322,6 @@ document.addEventListener('click', function(e) {
     block: 'start'
   });
 });
-
-
 
 
 // Counter
@@ -523,10 +534,7 @@ document.addEventListener('click', function(e) {
 })();
 
 
-
-
-
-  // POPUP FORM PAGE
+// POPUP FORM PAGE
   document.addEventListener("DOMContentLoaded", () => {
     const HASH_PREFIX = "#open-popup/";
     const CONTENT_SELECTOR = "#sections";
@@ -661,7 +669,6 @@ document.addEventListener('click', function(e) {
   });
 
 
-
 (() => {
   const SECTION_SELECTOR = '[id*="scrolling-buttons"]';
   const LIST_SELECTOR = '.user-items-list-item-container';
@@ -733,7 +740,6 @@ document.addEventListener('click', function(e) {
     });
   });
 })();
-
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -863,7 +869,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
 document.addEventListener("DOMContentLoaded", function () {
 
   if (window.frameElement) return;
@@ -895,8 +900,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
-
-
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -943,8 +946,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
 
   const cards = [
@@ -978,7 +979,6 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", onScroll, {passive:true});
   window.addEventListener("resize", onScroll);
 });
-
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -1080,8 +1080,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
-  //scroll top
+//scroll top
     document.addEventListener('click', (e) => {
       const btn = e.target.closest('[href="#back-top"]');
       if (!btn) return;
@@ -1093,7 +1092,6 @@ document.addEventListener("DOMContentLoaded", () => {
         behavior: 'smooth'
       });
     });
-
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1108,7 +1106,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
-
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1139,7 +1136,6 @@ document.addEventListener('DOMContentLoaded', () => {
       window.addEventListener('resize', updateArrowHeight);
     });
 });
-
 
 
 (function () {
@@ -1203,4 +1199,3 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', calcStickyTop);
   window.addEventListener('scroll', handleScroll, { passive: true });
 })();
-
