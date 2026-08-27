@@ -2647,3 +2647,8 @@ body.menu-open {
 .custom-nav .header-nav-item {
   transition: opacity 0.2s ease;
 }
+
+body .header-skip-link.sqs-button-element--primary {
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
