@@ -82,10 +82,11 @@
 
     f && (
       gsap.set(y, { autoAlpha: 0, y: 0 }),
-      gsap.set(m.querySelector(`.desc[data-num="${v}"]`), { autoAlpha: 1 })
+      gsap.set(m.querySelector(`.desc[data-num="${v}"]`), { autoAlpha: 1 }),
+      m.querySelector(`.desc[data-num="${v}"]`)?.classList.add("active-tab")
     );
 
-    m.dataset.active = v;
+    m.dataset.active = "";
 
     function b(e) {
       if (e === m.dataset.active) return;
@@ -133,13 +134,20 @@
       p.forEach(e => e.classList.toggle("is-hovered", e === t));
     });
 
+    // Reset the "already active" guard every time the mouse re-enters the
+    // whole widget, so hovering tab 1 right after re-entering always runs
+    // the full switch — this is what kept breaking after the first time.
+    m.addEventListener("mouseenter", () => {
+      m.dataset.active = "";
+    });
+
     m.addEventListener("mouseleave", () => {
       m.classList.remove("is-titles-hover");
       p.forEach(e => {
         e.classList.remove("is-hovered");
-        e.classList.remove("active-tab");
       });
-      m.dataset.active = "";
+      // dataset.active / active-tab intentionally left alone here —
+      // the mouseenter handler above takes care of the reset instead.
 
       if (f) {
         gsap.to(y, { autoAlpha: 0, duration: 0.25, overwrite: "auto" });
@@ -510,8 +518,8 @@
       hideItems();
       clearTimeout(t);
       t = null;
-      header.style.removeProperty("overflow");     // immediate + strongest reset
-      header.style.overflow = "visible";           // extra hard reset (optional)
+      header.style.removeProperty("overflow");
+      header.style.overflow = "visible";
     };
 
     const sync = () => {
@@ -521,10 +529,8 @@
       now ? applyShrink() : removeShrink();
     };
 
-    // initial
     last ? applyShrink() : removeShrink();
 
-    // watch class changes
     new MutationObserver(sync).observe(header, {
       attributes: true,
       attributeFilter: ["class"]
@@ -532,7 +538,8 @@
   });
 
   // =============================================
-  // 7. PORTFOLIO PAGE (hover + video + HLS + mobile 2-tap)
+
+   // 7. PORTFOLIO PAGE (hover + video + HLS + mobile 2-tap)
   // =============================================
   (function () {
     const isEditor = window !== window.parent;
@@ -558,10 +565,8 @@
     const PORTFOLIO_PATH = '/portfolio-1';
     const MAX_PAGES = 20;
 
-    // cache: fullUrl -> { linkText, video: {type, url, hlsUrl, posterUrl}, categories }
     const pageCache = new Map();
 
-    // ---------- url helpers ----------
     function absUrl(u) {
       if (!u) return '';
       if (/^https?:\/\//i.test(u)) return u;
@@ -599,7 +604,6 @@
       return `https://player.vimeo.com/video/${id}?autoplay=1&muted=1&background=1&loop=1`;
     }
 
-    // ---------- category helpers ----------
     function normalizeCategory(str) {
       return (str || '')
         .toLowerCase()
@@ -630,7 +634,6 @@
       }
     }
 
-    // ---------- parse helpers ----------
     function pickFirstMeaningfulText(root) {
       if (!root) return '';
 
@@ -730,7 +733,6 @@
       const doc = new DOMParser().parseFromString(html, 'text/html');
       const sourceSection = doc.querySelector('#portfolio-source');
 
-      // text
       let linkText = 'View Item';
       let categories = [];
 
@@ -748,7 +750,6 @@
         });
       }
 
-      // video
       let video = null;
       if (sourceSection) {
         const hls = resolveSqspHostedHlsFrom(sourceSection);
@@ -765,7 +766,6 @@
       return out;
     }
 
-    // ---------- media control ----------
     let activeHls = null;
     let activeReq = 0;
 
@@ -871,7 +871,6 @@
 
       const hlsUrl = v.getAttribute('data-hls');
 
-    
       /*if (hlsUrl) {
         const canNative = v.canPlayType('application/vnd.apple.mpegurl') || v.canPlayType('application/x-mpegURL');
         if (canNative) {
@@ -885,35 +884,35 @@
           } catch (e) {}
         }
       }*/
-    
+
       if (hlsUrl) {
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-    if (isSafari && v.canPlayType('application/vnd.apple.mpegurl')) {
-      if (v.src !== hlsUrl) v.src = hlsUrl;
+        if (isSafari && v.canPlayType('application/vnd.apple.mpegurl')) {
+          if (v.src !== hlsUrl) v.src = hlsUrl;
 
-    } else if (window.Hls && window.Hls.isSupported()) {
-      try {
-        const hls = new Hls({
-          enableWorker: true,
-          lowLatencyMode: true
-        });
+        } else if (window.Hls && window.Hls.isSupported()) {
+          try {
+            const hls = new Hls({
+              enableWorker: true,
+              lowLatencyMode: true
+            });
 
-        hls.loadSource(hlsUrl);
-        hls.attachMedia(v);
+            hls.loadSource(hlsUrl);
+            hls.attachMedia(v);
 
-        hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          v.play().catch(() => {});
-        });
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+              v.play().catch(() => {});
+            });
 
-        activeHls = { hls, videoEl: v };
-        return;
+            activeHls = { hls, videoEl: v };
+            return;
 
-      } catch (e) {
-        console.warn('HLS init error:', e);
+          } catch (e) {
+            console.warn('HLS init error:', e);
+          }
+        }
       }
-    }
-  }
 
       try {
         const p = v.play();
@@ -959,7 +958,6 @@
       bgsWrap.querySelectorAll('.portfolio-cust-bgItem.is-active').forEach(el => el.classList.remove('is-active'));
     }
 
-    // ---------- init ----------
     (async function init() {
       try {
         titlesWrap.innerHTML = '';
@@ -974,7 +972,6 @@
         bgsWrap.className = 'portfolio-cust-bgs';
         sectionBg.appendChild(bgsWrap);
 
-        // 1) fetch portfolio index json
         let pageUrl = location.origin + PORTFOLIO_PATH + '?format=json-pretty';
         const all = [];
         const seen = new Set();
@@ -1035,7 +1032,6 @@
           itemsToRender = matched.length ? matched : all;
         }
 
-        // 2) render skeleton + fetch each item page to resolve text/video
         const CONCURRENCY = 6;
         let cursor = 0;
 
@@ -1052,7 +1048,6 @@
               ? (it.assetUrl.includes('?format=') ? it.assetUrl : (it.assetUrl + '?format=2500w'))
               : '';
 
-            // Title
             const p = document.createElement('p');
             p.className = 'portfolio-cust-title';
             p.setAttribute('data-item-number', n);
@@ -1063,14 +1058,12 @@
             p.appendChild(aTitle);
             titlesWrap.appendChild(p);
 
-            // Panel
             const panel = document.createElement('div');
             panel.className = 'portfolio-cust-link';
             panel.setAttribute('data-item-number', n);
             panel.innerHTML = `<a class="portfolio-cust-link__a" href="${href}">View Item</a>`;
             linksWrap.appendChild(panel);
 
-            // BG item container (default image)
             const bgItem = document.createElement('div');
             bgItem.className = 'portfolio-cust-bgItem';
             bgItem.setAttribute('data-item-number', n);
@@ -1128,7 +1121,6 @@
         for (let i = 0; i < CONCURRENCY; i++) workers.push(worker());
         await Promise.all(workers);
 
-        // ---------- interactions ----------
         function getNFromEl(el) {
           if (!el) return '';
           return el.getAttribute('data-item-number') || '';
@@ -1141,7 +1133,6 @@
 
         const isTouch = matchMedia('(hover: none) and (pointer: coarse)').matches;
 
-        // ---- Desktop hover: activate ----
         titlesWrap.addEventListener('mouseenter', (e) => {
           if (isTouch) return;
           const item = e.target.closest('.portfolio-cust-title');
@@ -1156,7 +1147,6 @@
           if (n) setActiveNumber(n, bgsWrap);
         }, true);
 
-        // keyboard
         wrapper.addEventListener('focusin', (e) => {
           if (isTouch) return;
           const t = e.target.closest('.portfolio-cust-title, .portfolio-cust-link');
@@ -1169,7 +1159,6 @@
           clearActive(bgsWrap);
         });
 
-        // ---- Desktop prewarm 200ms (for direct video only) ----
         if (!isTouch) {
           let prewarmTimer = null;
 
@@ -1184,10 +1173,8 @@
 
               const titleText = t ? (t.textContent || '').trim() : '';
 
-              // Create media nodes if needed (but do not play)
               await ensureBgMedia(b, titleText);
 
-              // For direct video: set src early + load metadata
               const v = b.querySelector('video.portfolio-cust-video');
               if (v) {
                 const ds = v.getAttribute('data-src');
@@ -1222,7 +1209,6 @@
           }, true);
         }
 
-        // ---- Mobile: 2 taps on LINK (1st preview, 2nd navigate) ----
         if (isTouch) {
           let armedHref = '';
 
@@ -1237,13 +1223,11 @@
             const href = a.getAttribute('href') || '';
             if (!href) return;
 
-            // Second tap on same link -> allow default navigation
             if (href === armedHref) {
               disarm();
               return;
             }
 
-            // First tap -> preview only
             e.preventDefault();
             e.stopPropagation();
 
@@ -1283,7 +1267,8 @@
   })();
 
   // =============================================
-  // 8. SCROLLING IMAGES — PORTFOLIO ITEM PAGE
+
+   // 8. SCROLLING IMAGES — PORTFOLIO ITEM PAGE
   // =============================================
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[id^="scrolling-images"] .gallery-block .slide').forEach(slide => {
@@ -1547,12 +1532,10 @@
 
       let color = null;
 
-      // HEX
       if (/^#([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i.test(text)) {
         color = text;
       }
 
-      // rgb / rgba
       else if (/^rgba?\(/i.test(text)) {
         color = text;
       }
@@ -1569,16 +1552,16 @@
   // 13. SCROLL TO TOP
   // =============================================
   document.addEventListener('click', (e) => {
-        const btn = e.target.closest('[href="#back-top"]');
-        if (!btn) return;
+    const btn = e.target.closest('[href="#back-top"]');
+    if (!btn) return;
 
-        e.preventDefault();
+    e.preventDefault();
 
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
 
   // =============================================
   // 14. CART TEXT FIX ("Added!" → "Added")
@@ -1707,7 +1690,12 @@
         if (folderLinks.length) {
           folderLinks.forEach(function (link) {
             const subKey = getUrlKey(link.getAttribute("href"));
-            const subPath = normalizePath(new URL(link.getAttribute("href"), window.location.origin).pathname);
+            const subPath = normalizePath(
+              new URL(
+                link.getAttribute("href"),
+                window.location.origin
+              ).pathname
+            );
 
             if (
               subKey === currentKey ||
