@@ -29,7 +29,6 @@ document.querySelectorAll('[id^="partners"] .gallery-block .slide').forEach(func
 
 });
 
-
 document.addEventListener("DOMContentLoaded", function () {
 
   if (document.body.classList.contains('sqs-edit-mode')) return;
@@ -69,12 +68,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Move sections inside wrapper
     sections.forEach(section => wrapper.appendChild(section));
 
-    // 🔎 Check if custom width exists (only checking first is enough)
     const hasCustomWidth = splitEl.getAttribute('data-1-width');
 
     if (hasCustomWidth) {
 
-      // Apply custom widths
       sections.forEach((section, index) => {
         const customWidth = splitEl.getAttribute(`data-${index + 1}-width`);
         if (customWidth) {
@@ -83,8 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
     } else {
-
-      // 👇 Add fallback class like two-cols, three-cols etc.
       const numberNames = {
         2: 'two',
         3: 'three',
@@ -113,14 +108,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-
 const items = document.querySelectorAll(
   '[data-section-id="69a6ab1374d4661cee017c9f"] .html-block, #testim-vert .html-block'
 );
   
 function updateOpacity() {
   const viewportCenter = window.innerHeight / 2;
-  const holdZone = 120; // 👈 pixels around center that stay full opacity
+  const holdZone = 120; 
 
   items.forEach(item => {
     const rect = item.getBoundingClientRect();
@@ -130,7 +124,6 @@ function updateOpacity() {
     let opacity;
 
     if (distance < holdZone) {
-      // Stay fully visible inside center zone
       opacity = 1;
     } else {
       const maxDistance = window.innerHeight / 2;
@@ -144,7 +137,6 @@ function updateOpacity() {
 }
 
 updateOpacity();
-
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -241,10 +233,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-
 document.addEventListener('DOMContentLoaded', () => {
-  const isEditor = window !== window.parent;
-  if (isEditor) return;
+  /*const isEditor = window !== window.parent;
+  if (isEditor) return;*/
 
   const SOURCE_PATH = '/page-for-navigation-menu';
   const SOURCE_URL  = `${SOURCE_PATH}?nocache=${Date.now()}`;
@@ -306,7 +297,6 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 });
 
-
 document.addEventListener('click', function(e) {
   const arrow = e.target.closest('.arrow-down, .arrow-down-dk');
   if (!arrow) return;
@@ -322,7 +312,6 @@ document.addEventListener('click', function(e) {
     block: 'start'
   });
 });
-
 
 // Counter
 (() => {
@@ -533,8 +522,7 @@ document.addEventListener('click', function(e) {
   });
 })();
 
-
-// POPUP FORM PAGE
+  // POPUP FORM PAGE
   document.addEventListener("DOMContentLoaded", () => {
     const HASH_PREFIX = "#open-popup/";
     const CONTENT_SELECTOR = "#sections";
@@ -668,7 +656,6 @@ document.addEventListener('click', function(e) {
     });
   });
 
-
 (() => {
   const SECTION_SELECTOR = '[id*="scrolling-buttons"]';
   const LIST_SELECTOR = '.user-items-list-item-container';
@@ -741,7 +728,6 @@ document.addEventListener('click', function(e) {
   });
 })();
 
-
 document.addEventListener('DOMContentLoaded', () => {
   const DESKTOP_BREAKPOINT = 768;
   let rafId = null;
@@ -800,7 +786,11 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const topSectionHeight = Math.ceil(topSection.getBoundingClientRect().height);
+    const topSectionHeight = Math.ceil(
+      topSection.getBoundingClientRect().height
+    );
+
+    const viewportHeight = window.innerHeight;
 
     topSection.style.top = '0px';
 
@@ -810,9 +800,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const header = section.querySelector('.stack-header');
       if (!header) return;
 
-      const headerHeight = Math.ceil(header.getBoundingClientRect().height);
+      const headerHeight = Math.ceil(
+        header.getBoundingClientRect().height
+      );
 
-      section.style.top = `${accumulatedTop}px`;
+      const sectionHeight = Math.ceil(
+        section.getBoundingClientRect().height
+      );
+
+      let sectionTop = accumulatedTop;
+
+      if (sectionTop + sectionHeight > viewportHeight) {
+  sectionTop = viewportHeight - sectionHeight;
+}
+
+      section.style.top = `${sectionTop}px`;
 
       accumulatedTop += headerHeight;
     });
@@ -845,7 +847,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     stackSections.forEach(section => {
       const header = section.querySelector('.stack-header');
-      if (header) resizeObserver.observe(header);
+
+      if (header) {
+        resizeObserver.observe(header);
+      }
+
+      resizeObserver.observe(section);
     });
   }
 
@@ -868,10 +875,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
 document.addEventListener("DOMContentLoaded", function () {
 
-  if (window.frameElement) return;
+  /*if (window.frameElement) return;*/
 
   const trigger = document.querySelector(".logo-lr");
   if (!trigger) return;
@@ -901,9 +907,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-
 document.addEventListener("DOMContentLoaded", () => {
-  if (window.frameElement) return;
+  //if (window.frameElement) return;
 
   const sections = Array.from(
     document.querySelectorAll('#main-stacked-card, [id^="stacked-card"]')
@@ -945,8 +950,8 @@ document.addEventListener("DOMContentLoaded", () => {
   wrapper.style.backgroundPosition = "center";
 });
 
-
 document.addEventListener("DOMContentLoaded", () => {
+  if (window.frameElement) return;
 
   const cards = [
     document.querySelector("#stacked-card-1"),
@@ -980,9 +985,8 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", onScroll);
 });
 
-
 document.addEventListener("DOMContentLoaded", () => {
-  if (window.frameElement) return;
+  /*if (window.frameElement) return;*/
 
   const section = document.querySelector("#blog-hub-v2");
   if (!section) return;
@@ -1079,8 +1083,7 @@ document.addEventListener("DOMContentLoaded", () => {
   swiper.update();
 });
 
-
-//scroll top
+  //scroll top
     document.addEventListener('click', (e) => {
       const btn = e.target.closest('[href="#back-top"]');
       if (!btn) return;
@@ -1092,7 +1095,6 @@ document.addEventListener("DOMContentLoaded", () => {
         behavior: 'smooth'
       });
     });
-
 
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.sqs-button-element--primary, .sqs-button-element--tertiary').forEach(btn => {
@@ -1106,7 +1108,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
-
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[id^="podcasts-list"]').forEach(carousel => {
@@ -1136,7 +1137,6 @@ document.addEventListener('DOMContentLoaded', () => {
       window.addEventListener('resize', updateArrowHeight);
     });
 });
-
 
 (function () {
   if (window !== window.parent) return;
