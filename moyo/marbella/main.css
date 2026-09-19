@@ -23,7 +23,7 @@ h1 {
 
 h1 [style="text-decoration:line-through"],
 h1 [style="text-decoration: line-through;"] {
-  font-size: clamp(100px, 13.8vw,200px);
+  font-size: clamp(100px, 13.8vw, 200px);
   text-decoration: none !important;
   line-height: 1em;
 }
