@@ -29,13 +29,13 @@ h1 [style="text-decoration: line-through;"] {
 }
 
 h2 {
-  font-size: clamp(30px, 4.02vw ,58px);
+  font-size: clamp(30px, 4.02vw, 58px);
   letter-spacing: -4%;
   font-weight: 300;
 }
 
 h2 strong {
-  font-size: clamp(36px, 5.6vw,80px);
+  font-size: clamp(36px, 5.6vw, 80px);
   text-decoration: none !important;
   letter-spacing: -4%;
   line-height: 1em;
@@ -49,14 +49,14 @@ h2 [style="text-decoration: line-through;"] {
 }
 
 h3 {
-  font-size: clamp(27px, 3.333vw,48px);
+  font-size: clamp(27px, 3.333vw, 48px);
   line-height: 1em;
   letter-spacing: -5%;
   font-weight: 300;
 }
 
 h4 {
-  font-size: clamp(22px, 1.66vw,24px);
+  font-size: clamp(22px, 1.66vw, 24px);
   letter-spacing: -4%;
   font-weight: 300;
   line-height: 1em;
@@ -64,13 +64,13 @@ h4 {
 
 h4 strong em {
   font-style: normal;
-  font-size: clamp(24px, 2.22vw,32px);
+  font-size: clamp(24px, 2.22vw, 32px);
   font-weight: 300;
   line-height: 1em;
 }
 
 h4 [style="text-decoration: line-through;"] {
-  font-size: clamp(24px, 2.22vw,32px) !important;
+  font-size: clamp(24px, 2.22vw, 32px) !important;
   font-weight: 300;
   line-height: 1em;
   text-decoration: none !important;
