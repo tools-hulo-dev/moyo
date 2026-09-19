@@ -2572,12 +2572,14 @@ body#cart .cart-checkout-button:before {
     transition:
       opacity 0.25s ease,
       transform 0.25s ease;
+    display: none;
   }
 
    .custom-menu-opening #header .header-display-desktop  .header-nav-list > *:not(:last-child).is-visible {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+    display: block;
   }
   
   #header .header-nav-item > a,
