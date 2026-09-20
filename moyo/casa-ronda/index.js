@@ -3,7 +3,7 @@
   // =============================================
   // 1. LARGE LOGO
   // =============================================
-  document.addEventListener("DOMContentLoaded", function () {
+/*  document.addEventListener("DOMContentLoaded", function () {
 
     if (window.frameElement) return;
 
@@ -29,7 +29,7 @@
 
     });
 
-  });
+  });*/
 
   // =============================================
   // 2. SERVICES SWITCHER
