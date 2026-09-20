@@ -2654,3 +2654,5 @@ body .header-skip-link.sqs-button-element--primary {
   visibility: hidden !important;
   opacity: 0 !important;
 }
+body:not(.sqs-edit-mode) #header .header-title-logo img:not(.large-logo){
+  opacity: 1;
