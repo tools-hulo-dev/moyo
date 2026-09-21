@@ -610,13 +610,13 @@ body:not(.sqs-edit-mode) #services-switcher .switcher-services {
 }
 #siteWrapper .summary-v2-block .summary-metadata-container a {
   color: var(--headingMediumColor);
-  font-family: 'Golos Text';
+  font-family: var(--meta-font-font-family);
   font-size: 10px;
   line-height: 1.3em;
 }
 #siteWrapper .summary-v2-block .summary-metadata-item.summary-metadata-item--cats:before {
   content: '(';
-  font-family: 'Golos Text';
+  font-family: var(--meta-font-font-family);
   font-size: 10px;
   line-height: 1.3em;
   display: inline-block;
@@ -624,7 +624,7 @@ body:not(.sqs-edit-mode) #services-switcher .switcher-services {
 }
 #siteWrapper .summary-v2-block .summary-metadata-item.summary-metadata-item--cats:after {
   content: ')';
-  font-family: 'Golos Text';
+  font-family: var(--meta-font-font-family);
   font-size: 10px;
   line-height: 1.3em;
   display: inline-block;
@@ -941,7 +941,7 @@ body:not(.sqs-edit-mode) #services-switcher .switcher-services {
 #siteWrapper [id*="ub-slider"] .list-item .list-item-content__title,
 #siteWrapper [id*="services-slider-ub"] .list-item .list-item-content__title {
   font-size: 12px !important;
-  font-family: 'Golos Text';
+  font-family: var(--meta-font-font-family);
   text-transform: uppercase;
   letter-spacing: -0.01em;
 }
@@ -962,7 +962,7 @@ body:not(.sqs-edit-mode) #services-switcher .switcher-services {
   font-size: 14px;
   display: block;
   margin-top: 48px;
-  font-family: 'Golos Text';
+  font-family: var(--meta-font-font-family);
   font-weight: 400;
 }
 #siteWrapper [id*="ub-slider-or"] .list-item:before,
@@ -1240,7 +1240,7 @@ body:not(.sqs-edit-mode) #services-switcher .switcher-services {
   left: 0;
   font-size: 12px;
   padding: 12px 12px 12px 8px;
-  font-family: 'Golos Text';
+  font-family: var(--meta-font-font-family);
   opacity: 0;
   z-index:999;
   -webkit-transition: all .3s ease-out !important;
@@ -1594,7 +1594,7 @@ body#collection-697869ee7daa733909a6781d .header-title-logo img {
   }
 }
 #siteWrapper #portfolio-cust-section .portfolio-cust-wrapper .portfolio-cust-links .portfolio-cust-link {
-  font-family: "Golos Text";
+  font-family: var(--meta-font-font-family);
   font-size: 12px;
   font-weight: 400;
   line-height: 1.2em;
@@ -1807,7 +1807,7 @@ body:not(.sqs-edit-mode) #siteWrapper [id^="scrolling-images"] .gallery-block {
   letter-spacing: -0.02em;
 }
 .collection-type-products.view-list .product-list-layout-container .product-list-item .product-list-item-price {
-  font-family: 'Golos Text';
+  font-family: var(--meta-font-font-family);
   font-size: 12px;
 }
 .collection-type-products.view-list .product-list-layout-container .product-list-item .product-list-item-add-to-cart {
@@ -1862,7 +1862,7 @@ body:not(.sqs-edit-mode) #siteWrapper [id^="scrolling-images"] .gallery-block {
 @media screen and (min-width:768px) {
   .collection-type-products.view-list .nested-category-children:before {
     content: 'all products';
-    font-family: 'Golos Text';
+    font-family: var(--meta-font-font-family);
     font-size: 14px;
     letter-spacing: -0.01em;
     text-transform: uppercase;
@@ -1871,7 +1871,7 @@ body:not(.sqs-edit-mode) #siteWrapper [id^="scrolling-images"] .gallery-block {
   }
 }
 .collection-type-products.view-list .nested-category-breadcrumb-link {
-  font-family: 'Golos Text';
+  font-family: var(--meta-font-font-family);
   font-size: 14px;
   letter-spacing: -0.01em;
   text-transform: uppercase !important;
@@ -1920,12 +1920,12 @@ body:not(.sqs-edit-mode) #siteWrapper [id^="scrolling-images"] .gallery-block {
   display: none;
 }
 .collection-type-products.view-list .category-navigation--mobile .product-filter-dropdown-container .product-filter-label {
-  font-family: 'Golos Text';
+  font-family: var(--meta-font-font-family);
   font-size: 14px !important;
   font-weight: 400 !important;
 }
 .collection-type-products.view-list .category-navigation--mobile .product-filter-dropdown-container #product-categories-filter-dropdown-select {
-  font-family: 'Golos Text';
+  font-family: var(--meta-font-font-family);
   font-size: 12px !important;
   text-transform: uppercase;
   height: fit-content !important;
@@ -1948,11 +1948,11 @@ body#cart .cart-title {
   margin-bottom: 40px;
 }
 body#cart .cart-row-title {
-  font-family: 'Golos Text';
+  font-family: var(--meta-font-font-family);
   font-weight: 400;
 }
 body#cart .cart-subtotal {
-  font-family: 'Golos Text';
+  font-family: var(--meta-font-font-family);
 }
 body#cart .cart-checkout-button {
   color: inherit !important;
@@ -2073,7 +2073,7 @@ body#cart .cart-checkout-button:before {
   display: flex;
   gap: 10px;
   align-items: center;
-  font-family: 'Golos Text';
+  font-family: var(--meta-font-font-family);
   font-size: 12px;
   font-weight: 400;
   justify-content: end;
@@ -2218,7 +2218,7 @@ body#cart .cart-checkout-button:before {
   margin-bottom: 5px;
 }
 #siteWrapper .product-block .product-price {
-  font-family: 'Golos Text';
+  font-family: var(--meta-font-font-family);
   font-size: 12px;
   font-weight: 400;
   line-height: 1.2em;
@@ -2269,7 +2269,7 @@ body#cart .cart-checkout-button:before {
 #siteWrapper [id^='res-courses'] .html-block.sqs-background-enabled p.sqsrte-small {
   margin: 0;
   text-transform: uppercase;
-  font-family:"Golos Text";
+  font-family: var(--meta-font-font-family);
 }
 #siteWrapper [id^='res-courses'] .html-block.sqs-background-enabled p.sqsrte-small a {
   text-decoration: none;
