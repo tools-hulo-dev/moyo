@@ -1181,7 +1181,7 @@ body:not(.sqs-edit-mode) #services-switcher .switcher-services {
 .custom-nav .header-nav-item>a,
 .custom-nav .header-nav-item .header-nav-folder-title-text {
   font-size: 24px;
-  font-family: 'ortica-linear-cx96vo';
+  font-family: var(--heading-font-font-family);
   color: #fff !important;
   opacity: 1;
   line-height: 1.1em;
@@ -1537,7 +1537,7 @@ body#collection-697869ee7daa733909a6781d .header-title-logo img {
   }
 }
 #siteWrapper #portfolio-cust-section .portfolio-cust-wrapper .portfolio-cust-title {
-  font-family: 'Ortica Linear';
+  font-family: var(--heading-font-font-family);
   font-size: clamp(32px, 5.56vw, 80px);
   font-weight: 300;
   text-transform: uppercase;
@@ -1577,7 +1577,7 @@ body#collection-697869ee7daa733909a6781d .header-title-logo img {
 }
 #siteWrapper #portfolio-cust-section .portfolio-cust-wrapper .portfolio-cust-header h3 {
   margin: 0;
-  font-family: 'Ortica Linear';
+  font-family: var(--heading-font-font-family);
   font-size: clamp(20px, 1.4vw, 24px);
   font-weight: 300;
   text-transform: uppercase;
@@ -1814,7 +1814,7 @@ body:not(.sqs-edit-mode) #siteWrapper [id^="scrolling-images"] .gallery-block {
   margin-top: clamp(15px, 2.08vw, 30px) !important;
 }
 .collection-type-products.view-list .product-list-layout-container .product-list-item .product-list-item-add-to-cart .sqs-add-to-cart-button-inner * {
-  font-family: 'Ortica Linear';
+  font-family: var(--heading-font-font-family);
   font-weight: 300;
   font-size: clamp(14px, 1.25vw, 18px);
   letter-spacing: -0.05em;
@@ -1968,7 +1968,7 @@ body#cart .cart-checkout-button:before {
   opacity: 0.8;
 }
 .collection-type-products.view-item .product-title {
-  font-family: 'Ortica Linear' !important;
+  font-family: var(--heading-font-font-family) !important;
   font-weight: 300 !important;
 }
 @media screen and (min-width:768px) {
@@ -2229,7 +2229,7 @@ body#cart .cart-checkout-button:before {
 #siteWrapper .product-block button {
   padding: 0 !important;
   width: fit-content;
-  font-family: 'Ortica Linear';
+  font-family: var(--heading-font-font-family);
   letter-spacing: -0.05em;
   font-weight: 300;
   font-size: clamp(18px, 1.25vw, 18px) !important;
@@ -2345,7 +2345,7 @@ body#cart .cart-checkout-button:before {
   height: 100%;
 }
 #siteWrapper [id^='res-tools'] .user-items-list-item-container .list-item .list-item-content p a {
-  font-family: 'Ortica Linear';
+  font-family: var(--heading-font-font-family);
   font-weight: 300;
   letter-spacing: -0.05em;
   font-size: clamp(20px, 1.7vw, 24px);
