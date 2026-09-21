@@ -306,7 +306,7 @@ body:not(.sqs-edit-mode) [id*="-lrp"] .sqs-block:not(.image-block) {
 #header .header-nav-item button {
   position: relative;
   line-height: 1.1em;
-  font-family: 'Golos Text';
+  font-family: var(--meta-font-font-family);
   font-size: 10px !important;
   text-transform: uppercase;
 }
