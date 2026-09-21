@@ -31,6 +31,43 @@
 
   });*/
 
+  (function () {
+  "use strict";
+
+  function init() {
+    if (window.frameElement) return;
+
+    var cfg = window.LARGE_LOGO || {};
+    var logoSrc = cfg.src || "";
+    if (!logoSrc) return;
+
+    var trigger = document.querySelector(".logo-lr");
+    if (!trigger) return;
+
+    var logoLinks = document.querySelectorAll(".header-title-logo a");
+    if (!logoLinks.length) return;
+
+    Array.prototype.forEach.call(logoLinks, function (logoLink) {
+      if (logoLink.querySelector(".large-logo")) return;
+
+      var img = document.createElement("img");
+
+      img.className = "large-logo";
+      img.src = logoSrc;
+      img.alt = cfg.alt || "Logo";
+
+      logoLink.appendChild(img);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+
+
   // =============================================
   // 2. SERVICES SWITCHER
   // =============================================
