@@ -1332,7 +1332,7 @@ body:not(.sqs-edit-mode) #services-switcher .switcher-services {
 .custom-menu-opening #header .menu-open {
   margin-left: 24px;
   line-height: 1.1em;
-  font-family: 'Golos Text';
+font-family: var(--meta-font-font-family);
   font-size: 10px;
   text-transform: uppercase;
 }
