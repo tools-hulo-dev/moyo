@@ -980,7 +980,7 @@ body:not(.sqs-edit-mode) #services-switcher .switcher-services {
 #siteWrapper [id*="ub-slider-or"] .list-item .list-item-content__description p,
 #siteWrapper [id*="services-slider-ub"] .list-item .list-item-content__description p {
   font-size: 14px;
-  font-family: 'Schibsted Grotesk', sans-serif;
+      font-family: var(--body-font-font-family);
 }
 #siteWrapper [id*="ub-slider-or"] .list-item .list-item-media *,
 #siteWrapper [id*="ub-slider-or"] .list-item .list-item-content *,
@@ -1106,7 +1106,7 @@ body:not(.sqs-edit-mode) #services-switcher .switcher-services {
   display: block ! IMPORTANT;
   font-size: 14px;
   text-transform: uppercase;
-  font-family: 'Schibsted Grotesk';
+      font-family: var(--body-font-font-family);
 }
 #siteWrapper #services-slider-ub .swiper-controls .swiper-button-prev {
   transform: none;
@@ -1802,7 +1802,7 @@ body:not(.sqs-edit-mode) #siteWrapper [id^="scrolling-images"] .gallery-block {
   font-weight:300 !important;
 }
 .collection-type-products.view-list .product-list-layout-container .product-list-item .product-list-item-title {
-  font-family: "Schibsted Grotesk";
+      font-family: var(--body-font-font-family);
   font-size: 14px;
   letter-spacing: -0.02em;
 }
@@ -1962,7 +1962,7 @@ body#cart .cart-checkout-button:before {
   display: none !important;
 }
 .collection-type-products.view-item .product-nav a {
-  font-family: 'Schibsted Grotesk';
+      font-family: var(--body-font-font-family);
 }
 .collection-type-products.view-item .product-nav a:hover {
   opacity: 0.8;
@@ -1977,7 +1977,7 @@ body#cart .cart-checkout-button:before {
   }
 }
 .collection-type-products.view-item .product-description * {
-  font-family: 'Schibsted Grotesk' !important;
+      font-family: var(--body-font-font-family) !important;
 }
 #siteWrapper [id^='contact-p'] .sqs-button-element--tertiary {
   color: inherit;
@@ -2127,7 +2127,7 @@ body#cart .cart-checkout-button:before {
   border-right: none;
   border-bottom: 1px solid #000;
   text-align: center;
-  font-family: 'Schibsted Grotesk' !important;
+  font-family: var(--body-font-font-family) !important;
   font-style:italic;
   font-size: 13px !important;
   font-weight: 400;
@@ -2142,7 +2142,7 @@ body#cart .cart-checkout-button:before {
 #popup-form-p .form-block textarea::placeholder {
   color: rgba(0, 0, 0, 0.3) !important;
   text-align: center;
-  font-family: 'Schibsted Grotesk' !important;
+  font-family: var(--body-font-font-family) !important;
   font-size: 13px !important;
   font-weight: 400;
   line-height: 1.1em;
@@ -2150,7 +2150,7 @@ body#cart .cart-checkout-button:before {
 }
 #popup-form-p .form-block select.show-placeholder {
   color: rgba(0, 0, 0, 0.3) !important;
-  font-family: 'Schibsted Grotesk' !important;
+  font-family: var(--body-font-font-family) !important;
   font-size: 13px !important;
   font-weight: 400;
   line-height: 1.1em;
@@ -2159,7 +2159,7 @@ body#cart .cart-checkout-button:before {
 #popup-form-p .form-block select:not(.show-placeholder) {
   color: #000 !important;
   opacity: 1 !important;
-  font-family: 'Schibsted Grotesk' !important;
+    font-family: var(--body-font-font-family) !important;
   font-size: 13px !important;
   font-weight: 400;
   line-height: 1.1em;
@@ -2168,7 +2168,7 @@ body#cart .cart-checkout-button:before {
 #popup-form-p .form-block select option {
   color: #000;
   background: #fff;
-  font-family: 'Schibsted Grotesk' !important;
+    font-family: var(--body-font-font-family) !important;
   font-size: 13px !important;
   font-weight: 400;
   line-height: 1.1em;
@@ -2180,7 +2180,7 @@ body#cart .cart-checkout-button:before {
 }
 #popup-form-p .form-block .select .QeVRMFrE3dDozGvZ:after {
   content: '';
-  font-family: 'Schibsted Grotesk';
+    font-family: var(--body-font-font-family);
   font-size: 14px;
   font-weight: 400;
   top: -50%;
@@ -2210,7 +2210,7 @@ body#cart .cart-checkout-button:before {
   transform: translateY(3px);
 }
 #siteWrapper .product-block .product-title {
-  font-family: 'Schibsted Grotesk';
+  font-family: var(--body-font-font-family);
   font-size: 14px;
   letter-spacing: -0.02em;
   font-weight: 400;
