@@ -2659,5 +2659,5 @@ body .header-skip-link.sqs-button-element--primary {
   opacity: 0 !important;
 }
 body:not(.sqs-edit-mode) #header.header .header-title-logo img:not(.large-logo){
-  opacity: 1;
+ /* opacity: 1;*/
 }
