@@ -33,6 +33,10 @@ h2 {
 h3 {
   font-size: clamp(24px, 1.6vw,24px);
 }
+h3 [style*="text-decoration:line-through"]{
+  font-style: italic;
+  text-decoration: none !important;
+}
 h3 em {
   font-size: clamp(27px, 2.7vw,40px);
   font-style: normal;
