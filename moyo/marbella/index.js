@@ -1,3 +1,34 @@
+/* LARGE HEADER LOGO */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const trigger = document.querySelector(".logo-lr");
+  if (!trigger) return;
+
+  const logoLinks = document.querySelectorAll(".header-title-logo a");
+  if (!logoLinks.length) return;
+
+  const header = document.querySelector("#header");
+
+  const logoSrc = header?.classList.contains("black")
+    ? window.LARGE_LOGO.darkSectionSrc
+    : window.LARGE_LOGO.lightSectionSrc;
+
+  logoLinks.forEach((logoLink) => {
+    if (logoLink.querySelector(".large-logo")) return;
+
+    const img = document.createElement("img");
+    img.className = "large-logo";
+    img.src = logoSrc;
+    img.alt = window.LARGE_LOGO.alt;
+
+    logoLink.appendChild(img);
+  });
+
+});
+
+/* PARTNERS GALLERY IMAGES */
+
 document.querySelectorAll('[id^="partners"] .gallery-block .slide').forEach(function(slide) {
 
   const img = slide.querySelector('img');
@@ -29,6 +60,8 @@ document.querySelectorAll('[id^="partners"] .gallery-block .slide').forEach(func
 
 });
 
+/* SPLIT SECTIONS */
+
 document.addEventListener("DOMContentLoaded", function () {
 
   if (document.body.classList.contains('sqs-edit-mode')) return;
@@ -52,10 +85,8 @@ document.addEventListener("DOMContentLoaded", function () {
     wrapper.className = 'sections-split-wrapper';
     wrapper.id = `split-sections-${wrapperIndex}`;
 
-    // Insert wrapper before first section
     firstSection.parentNode.insertBefore(wrapper, firstSection);
 
-    // Collect correct number of sections
     let currentSection = firstSection;
     const sections = [];
 
@@ -65,7 +96,6 @@ document.addEventListener("DOMContentLoaded", function () {
       currentSection = currentSection.nextElementSibling;
     }
 
-    // Move sections inside wrapper
     sections.forEach(section => wrapper.appendChild(section));
 
     const hasCustomWidth = splitEl.getAttribute('data-1-width');
@@ -96,7 +126,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    // Sticky logic
     const stickyIndex = parseInt(sticky, 10);
     if (!isNaN(stickyIndex) && stickyIndex > 0 && sections[stickyIndex - 1]) {
       sections[stickyIndex - 1].classList.add('sticky-section');
@@ -107,6 +136,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
+/* TESTIMONIAL / HTML BLOCK OPACITY */
 
 const items = document.querySelectorAll(
   '[data-section-id="69a6ab1374d4661cee017c9f"] .html-block, #testim-vert .html-block'
@@ -138,6 +169,8 @@ function updateOpacity() {
 
 updateOpacity();
 
+/* BLOG HUB SLIDER */
+
 document.addEventListener("DOMContentLoaded", function () {
 
   const blogHub = document.querySelector('#blog-hub');
@@ -148,15 +181,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (blogHub.querySelector('.swiper')) return;
 
-  // Create outer wrapper
   const sliderWrapper = document.createElement('div');
   sliderWrapper.classList.add('blog-slider-wrapper');
 
-  // Create swiper container
   const swiperContainer = document.createElement('div');
   swiperContainer.classList.add('swiper');
 
-  // Navigation wrapper
   const navWrapper = document.createElement('div');
   navWrapper.classList.add('blog-slider-nav');
 
@@ -169,19 +199,14 @@ document.addEventListener("DOMContentLoaded", function () {
   navWrapper.appendChild(prevBtn);
   navWrapper.appendChild(nextBtn);
 
-  // Insert wrapper
   list.parentNode.insertBefore(sliderWrapper, list);
 
-  // Move swiper container
   sliderWrapper.appendChild(swiperContainer);
 
-  // Move list inside swiper
   swiperContainer.appendChild(list);
 
-  // Insert nav after slider
   sliderWrapper.parentNode.insertBefore(navWrapper, sliderWrapper.nextSibling);
 
-  // Structure classes
   list.classList.add('swiper-wrapper');
 
   const slides = list.querySelectorAll('.summary-item');
@@ -189,13 +214,11 @@ document.addEventListener("DOMContentLoaded", function () {
   slides.forEach(slide => {
     slide.classList.add('swiper-slide');
 
-    // remove squarespace inline layout styles
     slide.style.removeProperty('width');
     slide.style.removeProperty('margin-right');
     slide.style.removeProperty('clear');
   });
 
-  // Delay swiper init (fixes blink)
   requestAnimationFrame(() => {
 
     setTimeout(() => {
@@ -232,6 +255,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
+/* CUSTOM NAVIGATION MENU */
 
 document.addEventListener('DOMContentLoaded', () => {
   /*const isEditor = window !== window.parent;
@@ -297,6 +322,8 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 });
 
+/* SCROLL TO NEXT SECTION */
+
 document.addEventListener('click', function(e) {
   const arrow = e.target.closest('.arrow-down, .arrow-down-dk');
   if (!arrow) return;
@@ -313,7 +340,8 @@ document.addEventListener('click', function(e) {
   });
 });
 
-// Counter
+/* COUNTER */
+
 (() => {
   const LINK_SELECTOR = 'a[href*="#count-num"]';
 
@@ -522,139 +550,142 @@ document.addEventListener('click', function(e) {
   });
 })();
 
-  // POPUP FORM PAGE
-  document.addEventListener("DOMContentLoaded", () => {
-    const HASH_PREFIX = "#open-popup/";
-    const CONTENT_SELECTOR = "#sections";
+/* POPUP FORM PAGE */
 
-    function runSquarespaceAfterBodyLoad() {
-      const sqs = window.Squarespace;
-      if (sqs && typeof sqs.afterBodyLoad === "function") {
-        try {
-          sqs.AFTER_BODY_LOADED = false;
-          sqs.afterBodyLoad();
-        } catch (e) {
-          console.warn("Squarespace afterBodyLoad() failed", e);
-        }
+document.addEventListener("DOMContentLoaded", () => {
+  const HASH_PREFIX = "#open-popup/";
+  const CONTENT_SELECTOR = "#sections";
+
+  function runSquarespaceAfterBodyLoad() {
+    const sqs = window.Squarespace;
+    if (sqs && typeof sqs.afterBodyLoad === "function") {
+      try {
+        sqs.AFTER_BODY_LOADED = false;
+        sqs.afterBodyLoad();
+      } catch (e) {
+        console.warn("Squarespace afterBodyLoad() failed", e);
       }
     }
+  }
 
-    function preventAutoPlay(scope) {
-      if (!scope) return;
+  function preventAutoPlay(scope) {
+    if (!scope) return;
 
-      scope.querySelectorAll("video").forEach((v) => {
-        try {
-          v.autoplay = false;
-          v.removeAttribute("autoplay");
-          v.pause();
-        } catch (_) {}
+    scope.querySelectorAll("video").forEach((v) => {
+      try {
+        v.autoplay = false;
+        v.removeAttribute("autoplay");
+        v.pause();
+      } catch (_) {}
+    });
+  }
+
+  function parsePopupHref(rawHref) {
+    try {
+      const u = new URL(rawHref, location.origin);
+      const hash = (u.hash || "").trim();
+
+      if (!hash.startsWith(HASH_PREFIX)) return null;
+
+      const pathAfter = hash.slice(HASH_PREFIX.length).trim();
+      if (!pathAfter) return null;
+
+      return location.origin + "/" + pathAfter.replace(/^\/+/, "");
+    } catch {
+      return null;
+    }
+  }
+
+  async function getPopupContent(url) {
+    try {
+      const response = await fetch(url, {
+        credentials: "same-origin",
+        headers: {
+          "X-Requested-With": "XMLHttpRequest"
+        }
       });
-    }
 
-    function parsePopupHref(rawHref) {
-      try {
-        const u = new URL(rawHref, location.origin);
-        const hash = (u.hash || "").trim();
+      if (!response.ok) {
+        throw new Error(`Failed to fetch popup page: ${response.status}`);
+      }
 
-        if (!hash.startsWith(HASH_PREFIX)) return null;
+      const htmlText = await response.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlText, "text/html");
+      const sections = doc.querySelector(CONTENT_SELECTOR);
 
-        const pathAfter = hash.slice(HASH_PREFIX.length).trim();
-        if (!pathAfter) return null;
-
-        return location.origin + "/" + pathAfter.replace(/^\/+/, "");
-      } catch {
+      if (!sections) {
+        console.warn(`Popup content not found: ${CONTENT_SELECTOR} on`, url);
         return null;
       }
+
+      return sections.outerHTML;
+    } catch (error) {
+      console.warn("Popup fetch/parse failed:", error);
+      return null;
     }
+  }
 
-    async function getPopupContent(url) {
-      try {
-        const response = await fetch(url, {
-          credentials: "same-origin",
-          headers: {
-            "X-Requested-With": "XMLHttpRequest"
-          }
-        });
+  async function openPopup(url) {
+    const slug = new URL(url).pathname
+      .replace(/^\/+/, "")
+      .replace(/\/+$/, "")
+      .replace(/\//g, "-");
 
-        if (!response.ok) {
-          throw new Error(`Failed to fetch popup page: ${response.status}`);
-        }
+    const popupHtml = await getPopupContent(url);
+    if (!popupHtml) return;
 
-        const htmlText = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlText, "text/html");
-        const sections = doc.querySelector(CONTENT_SELECTOR);
-
-        if (!sections) {
-          console.warn(`Popup content not found: ${CONTENT_SELECTOR} on`, url);
-          return null;
-        }
-
-        return sections.outerHTML;
-      } catch (error) {
-        console.warn("Popup fetch/parse failed:", error);
-        return null;
-      }
-    }
-
-    async function openPopup(url) {
-      const slug = new URL(url).pathname
-        .replace(/^\/+/, "")
-        .replace(/\/+$/, "")
-        .replace(/\//g, "-");
-
-      const popupHtml = await getPopupContent(url);
-      if (!popupHtml) return;
-
-      Fancybox.show(
-        [
-          {
-            src: `
-              <div class="popup-page-content">
-                ${popupHtml}
-              </div>
-            `,
-            type: "html"
-          }
-        ],
+    Fancybox.show(
+      [
         {
-          mainClass: `page-popup popup--${slug}`,
-          closeButton: false,
-          dragToClose: false,
+          src: `
+            <div class="popup-page-content">
+              ${popupHtml}
+            </div>
+          `,
+          type: "html"
+        }
+      ],
+      {
+        mainClass: `page-popup popup--${slug}`,
+        closeButton: false,
+        dragToClose: false,
 
-          on: {
-            done: (fb, slide) => {
-              const root = slide.contentEl;
-              if (!root) return;
+        on: {
+          done: (fb, slide) => {
+            const root = slide.contentEl;
+            if (!root) return;
 
-              runSquarespaceAfterBodyLoad();
-              preventAutoPlay(root);
-            }
+            runSquarespaceAfterBodyLoad();
+            preventAutoPlay(root);
           }
         }
-      );
-    }
-
-    document.addEventListener("click", (e) => {
-      const a = e.target.closest('a[href*="#open-popup/"]');
-      if (!a) return;
-
-      const url = parsePopupHref(a.getAttribute("href") || a.href);
-      if (!url) return;
-
-      e.preventDefault();
-      e.stopPropagation();
-
-      openPopup(url);
-    });
-
-    document.addEventListener("click", (e) => {
-      if (e.target.closest(".exit-butt-popup")) {
-        e.preventDefault();
-        Fancybox.close();
       }
-    });
+    );
+  }
+
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href*="#open-popup/"]');
+    if (!a) return;
+
+    const url = parsePopupHref(a.getAttribute("href") || a.href);
+    if (!url) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    openPopup(url);
   });
+
+  document.addEventListener("click", (e) => {
+    if (e.target.closest(".exit-butt-popup")) {
+      e.preventDefault();
+      Fancybox.close();
+    }
+  });
+});
+
+/* SCROLLING BUTTONS */
 
 (() => {
   const SECTION_SELECTOR = '[id*="scrolling-buttons"]';
@@ -727,6 +758,8 @@ document.addEventListener('click', function(e) {
     });
   });
 })();
+
+/* STACK SECTIONS */
 
 document.addEventListener('DOMContentLoaded', () => {
   const DESKTOP_BREAKPOINT = 768;
@@ -811,8 +844,8 @@ document.addEventListener('DOMContentLoaded', () => {
       let sectionTop = accumulatedTop;
 
       if (sectionTop + sectionHeight > viewportHeight) {
-  sectionTop = viewportHeight - sectionHeight;
-}
+        sectionTop = viewportHeight - sectionHeight;
+      }
 
       section.style.top = `${sectionTop}px`;
 
@@ -875,37 +908,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-
-  /*if (window.frameElement) return;*/
-
-  const trigger = document.querySelector(".logo-lr");
-  if (!trigger) return;
-
-  const logoLinks = document.querySelectorAll(".header-title-logo a");
-  if (!logoLinks.length) return;
-
-  const header = document.querySelector("#header");
-
-  const lightLogo = "https://static1.squarespace.com/static/6997f50ee34be41d58c58dd6/t/69b404cd9aa7a15fc1b71928/1773405390229/logo-lr.png";
-  const darkLogo  = "https://static1.squarespace.com/static/6997f50ee34be41d58c58dd6/t/69b40b794b4199499b9e5cd3/1773407098028/logo-lr-w.png";
-
-  const logoSrc = (header && header.classList.contains("black")) ? darkLogo : lightLogo;
-
-  logoLinks.forEach((logoLink) => {
-
-    if (logoLink.querySelector(".large-logo")) return;
-
-    const img = document.createElement("img");
-    img.className = "large-logo";
-    img.src = logoSrc;
-    img.alt = "Logo";
-
-    logoLink.appendChild(img);
-
-  });
-
-});
+/* STACKED CARDS GROUP */
 
 document.addEventListener("DOMContentLoaded", () => {
   //if (window.frameElement) return;
@@ -950,6 +953,8 @@ document.addEventListener("DOMContentLoaded", () => {
   wrapper.style.backgroundPosition = "center";
 });
 
+/* STACKED CARDS OPACITY */
+
 document.addEventListener("DOMContentLoaded", () => {
   if (window.frameElement) return;
 
@@ -960,20 +965,26 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("#stacked-card-4")
   ].filter(Boolean);
 
-  function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
+  function clamp(v, min, max){
+    return Math.max(min, Math.min(max, v));
+  }
 
   function onScroll(){
     const vh = window.innerHeight;
 
-    for(let i=0;i<cards.length-1;i++){
+    for(let i = 0; i < cards.length - 1; i++){
       const prev = cards[i];
-      const next = cards[i+1];
+      const next = cards[i + 1];
 
       const rect = next.getBoundingClientRect();
       const start = vh * 0.7;
       const end   = vh * 0.2;
 
-      const progress = clamp((start - rect.top) / (start - end), 0, 1);
+      const progress = clamp(
+        (start - rect.top) / (start - end),
+        0,
+        1
+      );
 
       //prev.style.opacity = (1 - progress).toFixed(3);
       prev.style.opacity = Math.pow(1 - progress, 1.5).toFixed(3);
@@ -981,9 +992,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   onScroll();
-  window.addEventListener("scroll", onScroll, {passive:true});
+  window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll);
 });
+
+/* BLOG HUB V2 */
 
 document.addEventListener("DOMContentLoaded", () => {
   /*if (window.frameElement) return;*/
@@ -999,14 +1012,19 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!items.length) return;
 
   const slides = Array.from(items).map(item => {
-    const link = item.querySelector(".summary-title-link, .summary-thumbnail-container");
+    const link = item.querySelector(
+      ".summary-title-link, .summary-thumbnail-container"
+    );
     const img = item.querySelector(".summary-thumbnail-image");
     const titleEl = item.querySelector(".summary-title-link");
     const excerptEl = item.querySelector(".summary-excerpt");
 
     const href = link?.getAttribute("href") || "#";
     const title = titleEl?.textContent.trim() || "";
-    const imgSrc = img?.getAttribute("src") || img?.getAttribute("data-src") || "";
+    const imgSrc =
+      img?.getAttribute("src") ||
+      img?.getAttribute("data-src") ||
+      "";
     const excerptHTML = excerptEl ? excerptEl.outerHTML : "";
 
     return `
@@ -1039,13 +1057,13 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="blog-slider-nav">
         <div class="blog-prev">
           <svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 4.45824L15 5.53047L3.04348 5.53047L7.54005 9.61625L7.254 10L4.19353e-07 5.20316L4.55861e-07 4.78555L7.25401 -6.77176e-07L7.54005 0.383746L3.04348 4.45824L15 4.45824Z" fill="black"/>
+            <path d="M15 4.45824L15 5.53047L3.04348 5.53047L7.54005 9.61625L7.254 10L4.19353e-07 5.20316L4.55861e-07 4.78555L7.25401 -6.77176e-07L7.54005 0.383746L3.04348 4.45824L15 4.45824Z" fill="black"/>
           </svg>
         </div>
 
         <div class="blog-next">
           <svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 5.54176L0 4.46953L11.9565 4.46953L7.45995 0.383747L7.746 0L15 4.79684V5.21445L7.746 10L7.45995 9.61625L11.9565 5.54176L0 5.54176Z" fill="black"/>
+            <path d="M0 5.54176L0 4.46953L11.9565 4.46953L7.45995 0.383747L7.746 0L15 4.79684V5.21445L7.746 10L7.45995 9.61625L11.9565 5.54176L0 5.54176Z" fill="black"/>
           </svg>
         </div>
       </div>
@@ -1083,60 +1101,81 @@ document.addEventListener("DOMContentLoaded", () => {
   swiper.update();
 });
 
-  //scroll top
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('[href="#back-top"]');
-      if (!btn) return;
+/* SCROLL TO TOP */
 
-      e.preventDefault();
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('[href="#back-top"]');
+  if (!btn) return;
 
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
+  e.preventDefault();
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.sqs-button-element--primary, .sqs-button-element--tertiary').forEach(btn => {
-    const textNodes = [...btn.childNodes].filter(n => n.nodeType === 3 && n.textContent.trim());
-    
-    textNodes.forEach(node => {
-      const span = document.createElement('span');
-      span.className = 'btn-text';
-      span.textContent = node.textContent;
-      node.replaceWith(span);
-    });
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
   });
 });
 
+/* BUTTON TEXT WRAPPER */
+
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('[id^="podcasts-list"]').forEach(carousel => {
+  document
+    .querySelectorAll(
+      '.sqs-button-element--primary, .sqs-button-element--tertiary'
+    )
+    .forEach(btn => {
 
-      carousel.querySelectorAll('.list-item').forEach(item => {
-        const title = item.querySelector('.list-item-content__title');
-        const media = item.querySelector(
-          '.user-items-list-carousel__media-container, .list-item-media'
-        );
-        if (title && media) media.appendChild(title);
+      const textNodes = [...btn.childNodes]
+        .filter(n => n.nodeType === 3 && n.textContent.trim());
+
+      textNodes.forEach(node => {
+        const span = document.createElement('span');
+        span.className = 'btn-text';
+        span.textContent = node.textContent;
+        node.replaceWith(span);
       });
+    });
+});
 
-      function updateArrowHeight() {
-        const mediaContainer = carousel.querySelector(
-          '.user-items-list-carousel__media-container'
-        );
-        if (!mediaContainer) return;
+/* PODCAST LIST */
 
-        const mediaHeight = mediaContainer.offsetHeight;
-        carousel.querySelectorAll('.user-items-list-carousel__arrow-icon-holder').forEach(arrow => {
+document.addEventListener('DOMContentLoaded', () => {
+
+  document.querySelectorAll('[id^="podcasts-list"]').forEach(carousel => {
+
+    carousel.querySelectorAll('.list-item').forEach(item => {
+      const title = item.querySelector('.list-item-content__title');
+      const media = item.querySelector(
+        '.user-items-list-carousel__media-container, .list-item-media'
+      );
+
+      if (title && media) {
+        media.appendChild(title);
+      }
+    });
+
+    function updateArrowHeight() {
+      const mediaContainer = carousel.querySelector(
+        '.user-items-list-carousel__media-container'
+      );
+
+      if (!mediaContainer) return;
+
+      const mediaHeight = mediaContainer.offsetHeight;
+
+      carousel
+        .querySelectorAll('.user-items-list-carousel__arrow-icon-holder')
+        .forEach(arrow => {
           arrow.style.height = mediaHeight + 'px';
           arrow.style.top = '0';
         });
-      }
+    }
 
-      updateArrowHeight();
-      window.addEventListener('resize', updateArrowHeight);
-    });
+    updateArrowHeight();
+    window.addEventListener('resize', updateArrowHeight);
+  });
 });
+
+/* STACK SECTIONS V2 */
 
 (function () {
   if (window !== window.parent) return;
@@ -1152,6 +1191,7 @@ document.addEventListener('DOMContentLoaded', () => {
   wrapper.appendChild(first);
 
   let next = wrapper.nextElementSibling;
+
   while (next && next.id.startsWith('stack-section-v2')) {
     const after = next.nextElementSibling;
     wrapper.appendChild(next);
@@ -1159,10 +1199,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const topSection = first;
-  const stackSections = [...document.querySelectorAll('[id^="stack-section-v2"]')];
+
+  const stackSections = [
+    ...document.querySelectorAll('[id^="stack-section-v2"]')
+  ];
+
   if (!stackSections.length) return;
 
-  const originalPaddingTop = parseFloat(getComputedStyle(topSection).paddingTop);
+  const originalPaddingTop = parseFloat(
+    getComputedStyle(topSection).paddingTop
+  );
 
   function calcStickyTop() {
     const topHeight = topSection.offsetHeight;
@@ -1172,6 +1218,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const sectionHeight = section.offsetHeight;
 
       let stickyTop;
+
       if (sectionHeight <= vpHeight - topHeight) {
         stickyTop = topHeight;
       } else {
@@ -1181,13 +1228,17 @@ document.addEventListener('DOMContentLoaded', () => {
       section.style.top = `${stickyTop}px`;
 
       const isLast = i === stackSections.length - 1;
-      const topZIndex = parseInt(getComputedStyle(topSection).zIndex) || 100;
-      section.style.zIndex = isLast ? topZIndex + 1 : i + 1;
+      const topZIndex =
+        parseInt(getComputedStyle(topSection).zIndex) || 100;
+
+      section.style.zIndex =
+        isLast ? topZIndex + 1 : i + 1;
     });
   }
 
   function handleScroll() {
     const wrapperTop = wrapper.getBoundingClientRect().top;
+
     if (wrapperTop < 0) {
       topSection.style.paddingTop = '0px';
     } else {
@@ -1196,6 +1247,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   calcStickyTop();
+
   window.addEventListener('resize', calcStickyTop);
-  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  window.addEventListener(
+    'scroll',
+    handleScroll,
+    { passive: true }
+  );
 })();
