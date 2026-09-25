@@ -554,7 +554,8 @@ document.addEventListener('click', function(e) {
 
 document.addEventListener("DOMContentLoaded", () => {
   const HASH_PREFIX = "#open-popup/";
-  const CONTENT_SELECTOR = "#sections";
+  // const CONTENT_SELECTOR = "#sections";
+  const CONTENT_SELECTOR = ".region .page-section";
 
   function runSquarespaceAfterBodyLoad() {
     const sqs = window.Squarespace;
